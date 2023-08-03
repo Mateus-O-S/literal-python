@@ -1,4 +1,4 @@
-from scenes.main_scene.resources.drawer import Drawer
+from visual.drawer import Drawer
 from game_object import GameObject
 from scenes.main_scene.resources.counter import Counter
 import math

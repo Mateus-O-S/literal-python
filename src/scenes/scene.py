@@ -1,9 +1,10 @@
-class Scene:
-    def __init__(self):
-        pass
+from visual.visual import VisualComponents
+import pygame
 
-    def setup(self):
-        pass
+class Scene:
+    def __init__(self, visual: VisualComponents):
+        self.visual = visual
 
     def update(self):
-        pass
+        self.visual.win.update()
+        self.visual.win.screen.fill((0, 0, 0))

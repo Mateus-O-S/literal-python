@@ -5,6 +5,10 @@ class EventServer:
     __listeners = {}
 
     @staticmethod
+    def clear():
+        EventServer.__listeners.clear()
+
+    @staticmethod
     def bind(command, type):
         if type not in EventServer.__listeners.keys():
             EventServer.__listeners[type] = []

@@ -1,4 +1,4 @@
-from scenes.main_scene.resources.drawer import Drawer
+from visual.drawer import Drawer
 
 class GameObject:
     __game_objects = []
