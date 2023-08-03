@@ -17,6 +17,10 @@ class GameObject:
     def global_render(drawer: Drawer):
         for obj in GameObject.__game_objects:
             obj.render(drawer)
+    
+    @staticmethod
+    def clear_objects():
+        GameObject.__game_objects.clear()
 
     def __init__(self):
         GameObject.__game_objects.append(self)

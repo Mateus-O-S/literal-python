@@ -7,9 +7,3 @@ class Scene:
 
     def update(self):
         pass
-
-    def clean(self):
-        pass
-
-    def reset(self):
-        pass

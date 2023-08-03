@@ -40,9 +40,3 @@ class MainScene(Scene):
         Counter.set_end()
         GameObject.global_update()
         GameObject.global_render(self.draw)
-
-    def clean(self):
-        GameObject.__game_objects.clear()
-
-    def reset(self):
-        self.setup()
