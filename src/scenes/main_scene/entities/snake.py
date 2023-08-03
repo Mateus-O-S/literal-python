@@ -1,6 +1,6 @@
-from resources.drawer import Drawer
+from scenes.main_scene.resources.drawer import Drawer
 from game_object import GameObject
-from resources.counter import Counter
+from scenes.main_scene.resources.counter import Counter
 import math
 import pygame
 from events.snake_coord_event import SnakeCoordEvent
