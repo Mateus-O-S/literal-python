@@ -10,12 +10,15 @@ from scenes.main_scene.resources.snake_fruit_collision import SnakeFruitCollisio
 from visual.visual import VisualComponents
 from scenes.scene import Scene
 from scenes.main_scene.resources.snake_map_collision import SnakeMapCollision
+from scenes.main_scene.resources.snake_snake_collision import SnakeSnakeCollision
 
 class MainScene(Scene):
     def __init__(self, visual: VisualComponents):
         super().__init__(visual)
         
         self.snake = Snake()
+
+        self.snale_snake_collision = SnakeSnakeCollision()
 
         self.snake_fruit_collision = SnakeFruitCollision()
         

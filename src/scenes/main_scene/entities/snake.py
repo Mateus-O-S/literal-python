@@ -7,6 +7,7 @@ from events.snake_coord_event import SnakeCoordEvent
 from events.event import EventServer
 from events.keyboard_event import KeyBoardEvent
 from events.snake_fruit_collision_event import SnakeFruitCollisionEvent
+from events.snake_event import SnakeEvent
 
 class Snake(GameObject):
     def __init__(self):
@@ -43,6 +44,7 @@ class Snake(GameObject):
         self.body[0][0] += float(self.velocity[0]) * Counter.delta_time()
         self.body[0][1] += float(self.velocity[1]) * Counter.delta_time()
         EventServer.pool(SnakeCoordEvent(self.body[0][0], self.body[0][1]))
+        EventServer.pool(SnakeEvent(self.body))
 
     def __walk_body(self):
         for i in range(1, len(self.body)):
