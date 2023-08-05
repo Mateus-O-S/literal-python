@@ -9,6 +9,7 @@ from default_resources.input_server import InputServer
 from scenes.main_scene.resources.snake_fruit_collision import SnakeFruitCollision
 from visual.visual import VisualComponents
 from scenes.scene import Scene
+from scenes.main_scene.resources.map_resizer import MapResizer
 from scenes.main_scene.resources.snake_map_collision import SnakeMapCollision
 from scenes.main_scene.resources.snake_snake_collision import SnakeSnakeCollision
 
@@ -22,12 +23,12 @@ class MainScene(Scene):
 
         self.snake_fruit_collision = SnakeFruitCollision()
         
-        self.fruit_generator = FruitGenerator()
-        self.fruit_generator.size = (visual.size[0] / visual.scale,
-                             visual.size[1] / visual.scale)
+        self.fruit_generator = FruitGenerator(visual)
 
         self.snake_map_collision = SnakeMapCollision(visual)
         
+        self.map_resizer = MapResizer(visual)
+
         self.input_server = InputServer()
 
         self.window_event_handler = WindowClosingHandler()

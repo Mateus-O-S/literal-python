@@ -10,8 +10,7 @@ class SnakeMapCollision:
         EventServer.bind(self.set_snake_coord, SnakeCoordEvent)
 
     def set_snake_coord(self, event: SnakeCoordEvent):
-        xout = event.x < 0 or event.x > self.visuals.size[0]
-        yout = event.y < 0 or event.y > self.visuals.size[1]
+        xout = event.x < 0 or event.x > self.visuals.size[0] / self.visuals.draw.scale
+        yout = event.y < 0 or event.y > self.visuals.size[1] / self.visuals.draw.scale
         if xout or yout:
             EventServer.pool(GameOverEvent())
-            print("soap")

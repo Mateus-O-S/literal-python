@@ -4,7 +4,8 @@ from visual.window import Window
 class VisualComponents:
     def __init__(self) -> None:
         self.size = (700, 700)
-        self.scale = 20
-
+        self.max_scale = 20
+        self.min_scale = 1
+        
         self.win = Window('a literal python kkkk', self.size)
-        self.draw = Drawer(self.scale, self.win.screen)
+        self.draw = Drawer(self.max_scale, self.win.screen)

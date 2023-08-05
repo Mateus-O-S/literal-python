@@ -8,6 +8,8 @@ from events.event import EventServer
 from events.keyboard_event import KeyBoardEvent
 from events.snake_fruit_collision_event import SnakeFruitCollisionEvent
 from events.snake_event import SnakeEvent
+from events.snake_size_event import SnakeSizeEvent
+from scenes.main_scene.resources.growth_function import growth
 
 class Snake(GameObject):
     def __init__(self):
@@ -20,6 +22,7 @@ class Snake(GameObject):
     def setup(self):
         EventServer.bind(self.grow, SnakeFruitCollisionEvent)
         EventServer.bind(self.input_threatment, KeyBoardEvent)
+        EventServer.bind(self.speed_up, SnakeSizeEvent)
 
     def grow(self, event):
         x = self.body[len(self.body) - 1][0] - 1
@@ -28,14 +31,17 @@ class Snake(GameObject):
 
 
     def input_threatment(self, event: KeyBoardEvent):
-        if event.key == pygame.K_d:
+        if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
             self.input = [1, 0]
-        elif event.key == pygame.K_a:
+        elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
             self.input = [-1, 0]
-        elif event.key == pygame.K_w:
+        elif event.key == pygame.K_w or event.key == pygame.K_UP:
             self.input = [0, -1]
-        elif event.key == pygame.K_s:
+        elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
             self.input = [0, 1]
+
+    def speed_up(self, event: SnakeSizeEvent):
+        self.speed = 10 + growth(event.size, 25, 80)
 
     def update(self):
         self.velocity[0] = (self.input[0] / math.sqrt(2)) * self.speed
@@ -44,6 +50,7 @@ class Snake(GameObject):
         self.body[0][0] += float(self.velocity[0]) * Counter.delta_time()
         self.body[0][1] += float(self.velocity[1]) * Counter.delta_time()
         EventServer.pool(SnakeCoordEvent(self.body[0][0], self.body[0][1]))
+        EventServer.pool(SnakeSizeEvent(len(self.body)))
         EventServer.pool(SnakeEvent(self.body))
 
     def __walk_body(self):
