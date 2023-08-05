@@ -1,6 +1,6 @@
 from visual.drawer import Drawer
 from game_object import GameObject
-from scenes.main_scene.resources.counter import Counter
+from scenes.main_scene.resources.delta_time import DeltaTime
 import math
 import pygame
 from events.snake_coord_event import SnakeCoordEvent
@@ -47,8 +47,8 @@ class Snake(GameObject):
         self.velocity[0] = (self.input[0] / math.sqrt(2)) * self.speed
         self.velocity[1] = (self.input[1] / math.sqrt(2)) * self.speed
         self.__walk_body()
-        self.body[0][0] += float(self.velocity[0]) * Counter.delta_time()
-        self.body[0][1] += float(self.velocity[1]) * Counter.delta_time()
+        self.body[0][0] += float(self.velocity[0]) * DeltaTime.delta_time()
+        self.body[0][1] += float(self.velocity[1]) * DeltaTime.delta_time()
         EventServer.pool(SnakeCoordEvent(self.body[0][0], self.body[0][1]))
         EventServer.pool(SnakeSizeEvent(len(self.body)))
         EventServer.pool(SnakeEvent(self.body))
@@ -59,8 +59,8 @@ class Snake(GameObject):
             ydis = self.body[i - 1][1] - self.body[i][1]
             dis = math.sqrt(xdis * xdis + ydis * ydis)
             if dis > 1:
-                self.body[i][0] += (xdis / dis) * self.speed * Counter.delta_time()
-                self.body[i][1] += (ydis / dis) * self.speed * Counter.delta_time()
+                self.body[i][0] += (xdis / dis) * self.speed * DeltaTime.delta_time()
+                self.body[i][1] += (ydis / dis) * self.speed * DeltaTime.delta_time()
     
     def render(self, drawer: Drawer):
         for i in self.body:

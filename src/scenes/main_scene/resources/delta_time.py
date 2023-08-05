@@ -1,20 +1,20 @@
 from time import time
 
-class Counter:
+class DeltaTime:
     __start = 0
     __end = 0
 
     @staticmethod
     def set_start():
-        Counter.__start = time()
+        DeltaTime.__start = time()
     
     @staticmethod
     def set_end():
-        Counter.__end = time()
+        DeltaTime.__end = time()
     
     @staticmethod
     def delta_time():
-        delta = Counter.__end - Counter.__start
+        delta = DeltaTime.__end - DeltaTime.__start
         if delta >= 0:
             return delta
         return 0

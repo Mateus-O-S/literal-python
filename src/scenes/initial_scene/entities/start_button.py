@@ -5,13 +5,13 @@ from events.event import EventServer
 from events.game_start_event import GameStartEvent
 import pygame
 
-class Button(GameObject):
+class StartButton(GameObject):
     def __init__(self, visual: VisualComponents):
         super().__init__()
         EventServer.bind(self.on_key_pressed, KeyBoardEvent)
         self.visual = visual
         font = pygame.font.Font("font.ttf", 40)
-        self.text = font.render("Press enter to play", True, (255, 255, 255))
+        self.text = font.render("Press space to play", True, (255, 255, 255))
         self.text_rect = self.text.get_rect()
         self.text_rect.center = (visual.size[0] * 0.5, 
                                  visual.size[1] * 0.5)

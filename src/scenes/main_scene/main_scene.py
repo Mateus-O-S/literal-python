@@ -1,7 +1,7 @@
 import pygame
 from game_object import GameObject
 from scenes.main_scene.entities.snake import Snake
-from scenes.main_scene.resources.counter import Counter
+from scenes.main_scene.resources.delta_time import DeltaTime
 import time
 from scenes.main_scene.resources.fruit_generator import FruitGenerator
 from default_resources.window_closing_handler import WindowClosingHandler
@@ -36,8 +36,8 @@ class MainScene(Scene):
         GameObject.global_setup()
 
     def update(self):
-        Counter.set_start()
+        DeltaTime.set_start()
         super().update()
-        Counter.set_end()
+        DeltaTime.set_end()
         GameObject.global_update()
         GameObject.global_render(self.visual.draw)
