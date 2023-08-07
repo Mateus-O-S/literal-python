@@ -11,7 +11,7 @@ class MapResizer(GameObject):
         EventServer.bind(self.on_snake_size, SnakeSizeEvent)
 
     def on_snake_size(self, event: SnakeSizeEvent):
-        nscale = self.visual.max_scale * growth(-event.size, 40, 100)
+        nscale = self.visual.max_scale * growth(-event.size, 40, 60)
         if nscale < self.visual.min_scale:
             self.visual.draw.scale = self.visual.min_scale
         else: 

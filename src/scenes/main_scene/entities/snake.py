@@ -41,7 +41,7 @@ class Snake(GameObject):
             self.input = [0, 1]
 
     def speed_up(self, event: SnakeSizeEvent):
-        self.speed = 10 + growth(event.size, 25, 80)
+        self.speed = 10 + growth(event.size, 55, 20)
 
     def update(self):
         self.velocity[0] = (self.input[0] / math.sqrt(2)) * self.speed

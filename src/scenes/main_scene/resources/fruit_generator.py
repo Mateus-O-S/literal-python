@@ -5,16 +5,23 @@ from events.event import EventServer
 from events.fruits_coord_event import FruitCoordEvent
 from events.snake_fruit_collision_event import SnakeFruitCollisionEvent
 from visual.visual import VisualComponents
+from events.snake_size_event import SnakeSizeEvent
+from scenes.main_scene.resources.growth_function import growth
 
 class FruitGenerator(GameObject):
     def __init__(self, visual: VisualComponents):
         super().__init__()
         self.__fruits = []
-        self.max_fruits = 20
+        self.max_fruits = 10
+        self.base_fruits = 2
         self.visual = visual
     
     def setup(self):
         EventServer.bind(self.remove_fruit, SnakeFruitCollisionEvent)
+        EventServer.bind(self.update_max_fruits, SnakeSizeEvent)
+    
+    def update_max_fruits(self, event: SnakeSizeEvent):
+        self.max_fruits = self.base_fruits + growth(event.size, 40, 10)
     
     def remove_fruit(self, event: SnakeFruitCollisionEvent):
             self.__fruits.remove(event.fruit)
@@ -30,4 +37,4 @@ class FruitGenerator(GameObject):
 
     def render(self, drawer: Drawer):
         for f in self.__fruits:
-            drawer.draw_pixel(f[0], f[1], (255, 50, 0))
+            drawer.draw_pixel(f[0], f[1], (205, 0, 100))

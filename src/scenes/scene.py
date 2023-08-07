@@ -7,4 +7,4 @@ class Scene:
 
     def update(self):
         self.visual.win.update()
-        self.visual.win.screen.fill((0, 200, 0))
+        self.visual.win.screen.fill((100, 200, 0))
