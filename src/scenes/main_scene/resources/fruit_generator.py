@@ -30,4 +30,4 @@ class FruitGenerator(GameObject):
 
     def render(self, drawer: Drawer):
         for f in self.__fruits:
-            drawer.draw_pixel(f[0], f[1], (255, 127, 0))
+            drawer.draw_pixel(f[0], f[1], (255, 50, 0))

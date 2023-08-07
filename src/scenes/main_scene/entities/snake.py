@@ -64,4 +64,4 @@ class Snake(GameObject):
     
     def render(self, drawer: Drawer):
         for i in self.body:
-            drawer.draw_pixel(i[0], i[1], (255, 0, 0))
+            drawer.draw_pixel(i[0], i[1], (0, 50, 255))

@@ -7,7 +7,7 @@ class Title(GameObject):
         super().__init__()
         self.visual = visual
         font = pygame.font.Font("font.ttf", 64)
-        self.text = font.render("Snake", True, (255, 255, 255), (0, 0, 0))
+        self.text = font.render("Snake", True, (255, 255, 255))
         self.text_rect = self.text.get_rect()
         self.text_rect.center = (visual.size[0] * 0.5, 
                                  visual.size[1] * 0.2)
