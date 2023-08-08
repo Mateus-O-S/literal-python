@@ -13,7 +13,7 @@ class DeltaTime:
         DeltaTime.__end = time()
     
     @staticmethod
-    def delta_time():
+    def get():
         delta = DeltaTime.__end - DeltaTime.__start
         if delta >= 0:
             return delta
