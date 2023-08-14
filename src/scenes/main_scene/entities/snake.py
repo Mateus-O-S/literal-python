@@ -3,26 +3,26 @@ from game_object import GameObject
 from scenes.main_scene.resources.delta_time import DeltaTime
 import math
 import pygame
-from events.snake_coord_event import SnakeCoordEvent
 from events.event import EventServer
+from events.snake_coord_event import SnakeCoordEvent
 from events.keyboard_event import KeyBoardEvent
-from events.snake_fruit_collision_event import SnakeFruitCollisionEvent
 from events.snake_body_event import SnakeBodyEvent
+from events.snake_fruit_collision_event import SnakeFruitCollisionEvent
+from events.destroy_enemy_part_event import DestroyEnemyPartEvent
 from events.snake_size_event import SnakeSizeEvent
 from scenes.main_scene.resources.growth_function import growth
+from scenes.main_scene.resources.get_sin_cos import get_sin_cos
 
 class Snake(GameObject):
     def __init__(self):
         super().__init__()
-        self.inputThreatement = _Snake_InputThreatement(self)
         self.movement = _Snake_Movement(self)
-        self.body: list[list[0, 0]] = [[1, 1], [2, 2]]
+        self.body: list[list[5, 5]] = [[6, 6], [7, 7]]
         self.input = [0, 0]
+        self.color = (0, 0, 0)
             
     def setup(self):
         EventServer.bind(self.grow, SnakeFruitCollisionEvent)
-        EventServer.bind(self.inputThreatement.threat, KeyBoardEvent)
-        EventServer.bind(self.movement.speed_up, SnakeSizeEvent)
 
     def grow(self, event):
         x = self.body[len(self.body) - 1][0] - 1
@@ -33,22 +33,16 @@ class Snake(GameObject):
         self.movement.update_speed()
         self.movement.walk_body()
         self.movement.walk_head()
-        EventServer.pool(SnakeCoordEvent(self.body[0][0], self.body[0][1]))
-        EventServer.pool(SnakeSizeEvent(len(self.body)))
-        EventServer.pool(SnakeBodyEvent(self.body))
 
     def render(self, drawer: Drawer):
         for i in self.body:
-            drawer.draw_pixel(i[0], i[1], (0, 50, 255))
+            drawer.draw_pixel(i[0], i[1], self.color)
 
 class _Snake_Movement:
     def __init__(self, snake: Snake) -> None:
         self.snake = snake
         self.velocity = [0, 0]
         self.speed = 10
-    
-    def speed_up(self, event: SnakeSizeEvent):
-        self.speed = 10 + growth(event.size, 55, 20)
     
     def walk_head(self):
         sk = self.snake
@@ -74,29 +68,6 @@ class _Snake_Movement:
 
     def __walk_body_part(self, i):
         sk = self.snake
-        angle = self.__get_sin_cos(sk.body[i - 1], sk.body[i])
+        angle = get_sin_cos(sk.body[i - 1], sk.body[i])
         sk.body[i][0] += angle[0] * self.speed * DeltaTime.get()
         sk.body[i][1] += angle[1] * self.speed * DeltaTime.get()
-    
-    def __get_sin_cos(self, a, b):
-        xdis = a[0] - b[0] 
-        ydis = a[1] - b[1]
-        dis = math.sqrt(xdis * xdis + ydis * ydis)
-        return [xdis / dis, ydis / dis]
-            
-
-
-class _Snake_InputThreatement:
-    def __init__(self, snake: Snake) -> None:
-        self.snake = snake
-
-    def threat(self, event: KeyBoardEvent):
-        self.snake.input = [0, 0]
-        if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-            self.snake.input[0] = 1
-        elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-            self.snake.input[0] = -1
-        if event.key == pygame.K_w or event.key == pygame.K_UP:
-            self.snake.input[1] = -1
-        elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
-            self.snake.input[1] = 1

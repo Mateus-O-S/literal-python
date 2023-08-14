@@ -22,8 +22,21 @@ class GameObject:
     def clear_objects():
         GameObject.__game_objects.clear()
 
+    @staticmethod
+    def get_type(T):
+        on_type = []
+        for g in GameObject.__game_objects:
+            if type(g) == T:
+                on_type.append(g)
+        return on_type
+
     def __init__(self):
         GameObject.__game_objects.append(self)
+
+    def destroy(self):
+        if self in self.__game_objects:
+            self.__game_objects.remove(self)
+            del self
 
     def setup(self):
         pass
