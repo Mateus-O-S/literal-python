@@ -5,7 +5,7 @@ from events.snake_coord_event import SnakeCoordEvent
 from events.keyboard_event import KeyBoardEvent
 from events.snake_body_event import SnakeBodyEvent
 from events.snake_size_event import SnakeSizeEvent
-from events.enemy_coord_event import EnemyPartCoordEvent
+from events.enemy_event import EnemyEvent
 from scenes.main_scene.resources.get_sin_cos import get_sin_cos
 from scenes.main_scene.resources.generator import Generator
 from events.destroy_enemy_part_event import DestroyEnemyPartEvent
@@ -39,8 +39,7 @@ class EnemySnake(Snake):
     def update(self):
         super().update()
         if len(self.body) > 1:
-            for p in self.body:
-                EventServer.pool(EnemyPartCoordEvent(p[0], p[1]))
+            EventServer.pool(EnemyEvent(self.body))
 
             self.input = get_sin_cos(self.target, self.body[0])
 
