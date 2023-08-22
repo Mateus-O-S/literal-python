@@ -21,7 +21,7 @@ class EnemySnake(Snake):
         self.body: list[list[-1, -1]] = [[0, 0], [1, 1]]
         self.__apply(x, y)
         self.movement.speed = 10
-        self.color = (255, 0, 255)
+        self.color = (14, 27, 153)
         self.target = [10, 10]
     
     def __apply(self, x, y):

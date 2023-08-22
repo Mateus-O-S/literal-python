@@ -23,4 +23,4 @@ class Fruit(GameObject):
             self.destroy()
 
     def render(self, drawer: Drawer):
-        drawer.draw_pixel(self.x, self.y, (205, 0, 100))
+        drawer.draw_pixel(self.x, self.y, (44, 61, 230))

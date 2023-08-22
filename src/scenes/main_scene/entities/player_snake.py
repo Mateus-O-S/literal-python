@@ -12,7 +12,7 @@ import pygame
 class PlayerSnake(Snake):
     def __init__(self):
         super().__init__()
-        self.color = (0, 50, 255)
+        self.color = (229, 180, 2)
         self.inputThreatement = _Snake_InputThreatement(self)
     
     def setup(self):
